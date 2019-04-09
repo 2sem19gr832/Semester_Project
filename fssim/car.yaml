@@ -23,20 +23,20 @@
 car:
 
   inertia:
-    m:        190.0   # Weight of the Vehicle [kg]
-    m_driver: 0.0     # Weight of the driver  [kg]
-    g:        9.81    # Graviti force         [m/s^2]
-    I_z:      110    # Inertial force I_zz 
+    m:        190.0   	# Weight of the Vehicle [kg]
+    m_driver: 0.0     	# Weight of the driver  [kg]
+    g:        9.81    	# Gravity force         [m/s^2]
+    I_z:      110    	# Inertial force I_zz 
 
   kinematics:
-    l: 1.53           # Vehicle Length [m]
-    b_F: 1.22          # From COG to front axle [m]
-    b_R: 1.22         # From COG to rear axle [m]
-    w_front: 0.5    # Percentage of weight front
-    h_cg: 0.262       # Heights of COG [m]
+    l: 1.53           	# Vehicle Length [m]
+    b_F: 1.22          	# From COG to front axle [m]
+    b_R: 1.22         	# From COG to rear axle [m]
+    w_front: 0.5    	# Percentage of weight front
+    h_cg: 0.262     	# Heights of COG [m]
 
-    # l_F = l * (1 - w_front);  # Front cg lever arm [m]
-    # l_R = l * w_front;  # Rear  cg lever arm [m]
+    # l_F = l * (1 - w_front);	# Front cg lever arm [m]
+    # l_R = l * w_front;  	# Rear  cg lever arm [m]
 
   # Magic Formula:
   # y=D*sin(C*atan(B*(1-E)*x+E*atan(B*x)))
@@ -48,11 +48,11 @@ car:
     E: -0.58
 
   aero:
-    C_Down: # F_Downforce = C_Downforce*v_x^2; C_Downforce = a*b*c
+    C_Down: 	# F_Downforce = C_Downforce*v_x^2; C_Downforce = a*b*c
       a: 1.22
       b: 2.6
       c: 0.6
-    C_drag: # F_Drag = C_Drag*v_x^2; C_drag = a*b*c
+    C_drag: 	# F_Drag = C_Drag*v_x^2; C_drag = a*b*c
       a: 0.7
       b: 1.0
       c: 1.0
@@ -60,7 +60,7 @@ car:
   drivetrain:
     Cm1: 5000
     Cr0: 180
-    inertia: 0.4 # wheel_plus_packaging
+    inertia: 0.4  # wheel_plus_packaging
     r_dyn: 0.231
     nm_wheels: 4
     
