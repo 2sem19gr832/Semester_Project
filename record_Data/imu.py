@@ -114,7 +114,7 @@ def printstuff():
     print (serial_data1)
 
 
-port = serial.Serial("COM5", baudrate=921600, timeout=3.0)
+port = serial.Serial("COM3", baudrate=921600, timeout=3.0)
 #crc32_func = crcmod.mkCrcFun(0x104c11db7, initCrc=0x00000000, rev = False, xorOut=0xFFFFFFFF)
         
 if __name__ == '__main__':

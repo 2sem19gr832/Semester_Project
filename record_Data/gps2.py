@@ -7,6 +7,6 @@ with  open('filenames.txt') as file:
     name = file.readline()
 
 with open(name + "_GPS2.txt", 'w') as file:
-    for i in range (10000):
+    while True:
         line = port.readline()
-        file.write(line.decode('ascii') + ' ' + str(time.time()))
+        file.write(line.decode('ascii', errors= 'ignore') + ' ' + str(time.time()))
