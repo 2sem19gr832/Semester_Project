@@ -60,7 +60,7 @@ for i = 2:length(angle)
     end
 end
 
-
+new_gps_angle = interp1(linspace(0,1,length(angle)), angle, linspace(0,1,length(accang)))
 
 %%
 accang(1)=0;
