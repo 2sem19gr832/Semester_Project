@@ -1,10 +1,12 @@
 
-test = load("test1_IMU1_modified.txt");
-gyro1 = test(:, [1,2,3,10]);
-accel1 = test(:, [4:6,10]);
-inklin1 = test(:, 7:10);
+test = load("test2_IMU1_modified.txt");
+gyro = test(:, 1:3);
+accel = test(:, 4:6);
+inklin = test(:, 7:9);
+imutimes = test(:, 10);
 
 %%
+clear test pos x y gpstimes lat long alt angle
 j=1;
 k=1;
 test = fileread("TEST2_GPS1.TXT");
@@ -59,4 +61,14 @@ for i = 2:length(angle)
 end
 
 
+
+%%
+accang(1)=0;
+for i = 1:length(gyro)
+    accang(i+1) = accang(i) + gyro(i,1);
+end
+
+%%
+fuse = imufilter('SampleRate', 125);
+q=fuse(accel, gyro*125);
 
