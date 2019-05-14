@@ -59,13 +59,44 @@ for i = 2:length(angle)
         angle(i:end) = angle(i:end) - 360;
     end
 end
-%% PLOT GPS COORDINATE.
+%% PLOT GPS COORDINATE. +Assorted plots.
+startis = 
+endis = 
 figure(3)
 plot(x,y)
+title("Position across testing");xlabel("distance in x [m]");ylabel("distance in y [m]")
 figure(4)
 subplot(1,2,1)
 plot(x)
+title("Position in x over time");xlabel("Samples");ylabel("Distance from start [m]")
 subplot(1,2,2)
+plot(y)
+title("Position in y over time");xlabel("Samples");%ylabel("Distance from start [m]")
+figure(5)
+xlim = x(startis:endis);  %putting limiters on x and y to isolate specific time
+ylim = y(startis:endis);
+subplot(1,2,1)
+plot(xlim)
+title("Isolated driving test, x axis travel"); xlabel("Samples");ylabel("Distance from start [m]")
+subplot(1,2,2)
+plot(ylim)
+title("Isolated driving test, y axis travel"); xlabel("Samples");%ylabel("Distance from start [m]")
+figure(6)
+plot(xlim,ylim)
+title("Isolated driving test GPS position");xlabel("Travel in x-axis[m]");ylabel("Travel in y-axis[m]")
+pos = [xlim, ylim];
+
+figure(7)
+for k = 2:1214
+    vel(k) = sqrt((xlim(k)-xlim(k-1))^2+(ylim(k)-ylim(k-1))^2)*20;  %times 20 to account for 20Hz sensor frequency.
+end
+plot(vel)
+title("The velocity during isolated testing scenario");xlabel("Samples");ylabel("Velocity [m/s]")
+%%  Calculations based on Velocity
+vell = vel(256:1040);
+vella = mean(vell);     %Rejzi - average velocity during racecar circle drive test.
+istesttime = gpstimes(25327)-gpstimes(24114)
+
 
 %%
 accang(1)=0+226.4864;   %Correcting IMU angle reading to have same starting angle.
