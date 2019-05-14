@@ -60,33 +60,33 @@ for i = 2:length(angle)
     end
 end
 %% PLOT GPS COORDINATE. +Assorted plots.
-startis = 
-endis = 
-figure(3)
+startiso = 24114;
+endiso = 25327;
+figure(1)
 plot(x,y)
 title("Position across testing");xlabel("distance in x [m]");ylabel("distance in y [m]")
-figure(4)
+figure(2)
 subplot(1,2,1)
 plot(x)
 title("Position in x over time");xlabel("Samples");ylabel("Distance from start [m]")
 subplot(1,2,2)
 plot(y)
 title("Position in y over time");xlabel("Samples");%ylabel("Distance from start [m]")
-figure(5)
-xlim = x(startis:endis);  %putting limiters on x and y to isolate specific time
-ylim = y(startis:endis);
+figure(3)
+xlim = x(startiso:endiso);  %putting limiters on x and y to isolate specific time
+ylim = y(startiso:endiso);
 subplot(1,2,1)
 plot(xlim)
 title("Isolated driving test, x axis travel"); xlabel("Samples");ylabel("Distance from start [m]")
 subplot(1,2,2)
 plot(ylim)
 title("Isolated driving test, y axis travel"); xlabel("Samples");%ylabel("Distance from start [m]")
-figure(6)
-plot(xlim,ylim)
+figure(4)
+plot(xlim,ylim, 'LineWidth', 1)
 title("Isolated driving test GPS position");xlabel("Travel in x-axis[m]");ylabel("Travel in y-axis[m]")
 pos = [xlim, ylim];
 
-figure(7)
+figure(5)
 for k = 2:1214
     vel(k) = sqrt((xlim(k)-xlim(k-1))^2+(ylim(k)-ylim(k-1))^2)*20;  %times 20 to account for 20Hz sensor frequency.
 end
@@ -106,7 +106,7 @@ end
 new_gps_angle = interp1(linspace(0,1,length(angle)), angle, linspace(0,1,length(accang)));
 
 %%  PLOT GPS/IMU ANGLE
-figure(1)
+figure(6)
 plot(accang)
 hold on
 plot(new_gps_angle)
@@ -124,11 +124,21 @@ testingrmse = sqrt(mean((testing).^2));   %root_mean_square_error
 testingmse = sum(abs((testing).^2))/length(new_gps_angle);    %mean_square_error
 testingmean = mean(testing);
 testingsum = sum(testing);
-figure(2)
+figure(7)
 plot(testing)
-
-
-
+%% 
+anglelim = angle(startiso:endiso);
+gpstimeslim = gpstimes(startiso:endiso);
+for i = 1:length(gpstimeslim)
+    gpstimeslims(i) = gpstimeslim(i)-gpstimes(startiso);
+end
+figure(8)
+plot(gpstimeslims,anglelim)
+hold on
+plot(gpstimeslims(j1),max(anglelim),'*')
+hold on
+plot(gpstimeslims(j2),min(anglelim),'*')
+hold off
 %%
 %fuse = imufilter('SampleRate', 125);
 %q=fuse(accel, gyro*125);
