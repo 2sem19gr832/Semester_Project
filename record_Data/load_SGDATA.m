@@ -41,7 +41,8 @@ ar = [6 8 11 14 16 18];
 figure(21)
 for j = 1:6 %Plotting angle and all suspension on same figure.
     %Steering wheel at 0 = neutral, >0 = left, <0 = right.
-    subplot(2,3,j)
+    %subplot(2,3,j)
+    figure(19+j)
         plot(SGDATA{ar(j)}.times(:,1),SGDATA{ar(j)}.pots(:,1))
         hold on
         plot(SGDATA{ar(j)}.times(:,1),SGDATA{ar(j)}.pots(:,2))  %RearLeft
@@ -56,21 +57,11 @@ for j = 1:6 %Plotting angle and all suspension on same figure.
         end
         legend("Wheel", "RLs", "FLs", "FRs", "RRs")
         %ylabel("test")
+        set(gca,'xtick',[0:45:length(SGDATA{ar(j)}.pots(:,1))])
+        grid on
         hold off
         
 end
-figure(21)
-subplot(2,3,1)
-set(gca,'xtick',[0:1000:3375])
-subplot(2,3,2)
-set(gca,'xtick',[0:1000:1270])
-subplot(2,3,3)
-set(gca,'xtick',[0:45:740])
-subplot(2,3,4)
-set(gca,'xtick',[0:45:435])
-subplot(2,3,5)
-set(gca,'xtick',[0:45:185])
-subplot(2,3,6)
-set(gca,'xtick',[0:1000:1350])
+
 %~6.4 seconds per rotation/encirclement
 1+1
