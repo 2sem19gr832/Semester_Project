@@ -59,9 +59,11 @@ for i = 2:length(angle)
         angle(i:end) = angle(i:end) - 360;
     end
 end
-%% PLOT GPS COORDINATE. +Assorted plots.
+%% PLOT GPS COORDINATE. +Isolated data plots
 startiso = 24114;
 endiso = 25327;
+startiso2 = 240;
+endiso2 = 1040;
 figure(1)
 plot(x,y)
 title("Position across testing");xlabel("distance in x [m]");ylabel("distance in y [m]")
@@ -93,9 +95,13 @@ end
 plot(vel)
 title("The velocity during isolated testing scenario");xlabel("Samples");ylabel("Velocity [m/s]")
 %%  Calculations based on Velocity
-vell = vel(256:1040);
-vella = mean(vell);     %Rejzi - average velocity during racecar circle drive test.
-istesttime = gpstimes(25327)-gpstimes(24114)
+vell = vel(startiso2:endiso2);   %Even further limited position.
+vella = mean(vell);     %Rejzi - average velocity during racecar circle drive test (at speed). = 10.4788m/s
+istesttime = gpstimes(endiso)-gpstimes(startiso); %time it takes in seconds to perform 
+istesttime2 = gpstimes(endiso2)-gpstimes(startiso2);
+
+%% Isolateddata2.0
+is2time = gpstimes(Isoldata(1).Position(1))-gpstimes(Isoldata(2).Position(1));  %~61 seconds.
 
 
 %%
@@ -135,12 +141,15 @@ end
 figure(8)
 plot(gpstimeslims,anglelim)
 hold on
-plot(gpstimeslims(j1),max(anglelim),'*')
+plot(gpstimeslims(23),max(anglelim),'*')
 hold on
-plot(gpstimeslims(j2),min(anglelim),'*')
+plot(gpstimeslims(922),min(anglelim),'*')
 hold off
+gpstimesdlim = gpstimeslims(startiso2:endiso2);
+angledlim = anglelim(startiso2:endiso2);
+figure(9)
+plot(gpstimesdlim,angledlim)
 %%
 %fuse = imufilter('SampleRate', 125);
 %q=fuse(accel, gyro*125);
-
 1+1
