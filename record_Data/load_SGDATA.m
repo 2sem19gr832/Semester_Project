@@ -71,7 +71,8 @@ SGisolt52 = [interp1(linspace(0,1,length(SGDATA{ar(5)}.pots(1:61.5220,1))), SGDA
             interp1(linspace(0,1,length(SGDATA{ar(3)}.pots(1:61.5220,1))), SGDATA{ar(3)}.pots(1:61.5220,1)', linspace(0,1,length(accang)));
             interp1(linspace(0,1,length(SGDATA{ar(4)}.pots(1:61.5220,1))), SGDATA{ar(4)}.pots(1:61.5220,1)', linspace(0,1,length(accang)))];
 isolt5gp = [SGisolt52; accang; new_gps_angle];
-size(isolt5gp)
+size(isolt5gp)  %attempt plot of this, against time frame
+
 
 %~6.4 seconds per rotation/encirclement
 1+1
