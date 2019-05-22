@@ -11,8 +11,8 @@ readings = split(fileArd, "RESET");
 readings(1:8,:) = [];
 TotalTime = 0;
 Angles = [];
-MaxDur = 3.369135000000000e+03;     %Maximum duration for any given test.
-for i=1:18          
+MaxDur = 3.369135000e+03;     %Maximum duration for any given test.
+for i=1:18
     
     readsplit{i,1} = str2num(cell2mat(readings(i)));
     
@@ -57,11 +57,22 @@ for j = 1:6 %Plotting angle and all suspension on same figure.
         end
         legend("Wheel", "RLs", "FLs", "FRs", "RRs")
         %ylabel("test")
-        set(gca,'xtick',[0:45:length(SGDATA{ar(j)}.pots(:,1))])
+        set(gca,'xtick',[0:is2time:length(SGDATA{ar(j)}.pots(:,1))])
         grid on
         hold off
         
 end
+%% isolating datasets:
+
+SGisolt5 = [SGDATA{ar(5)}.pots(1:61.5220,1)];
+SGisolt52 = [interp1(linspace(0,1,length(SGDATA{ar(5)}.pots(1:61.5220,1))), SGDATA{ar(5)}.pots(1:61.5220,1)', linspace(0,1,length(accang)));
+            interp1(linspace(0,1,length(SGDATA{ar(1)}.pots(1:61.5220,1))), SGDATA{ar(1)}.pots(1:61.5220,1)', linspace(0,1,length(accang)));
+            interp1(linspace(0,1,length(SGDATA{ar(2)}.pots(1:61.5220,1))), SGDATA{ar(2)}.pots(1:61.5220,1)', linspace(0,1,length(accang)));
+            interp1(linspace(0,1,length(SGDATA{ar(3)}.pots(1:61.5220,1))), SGDATA{ar(3)}.pots(1:61.5220,1)', linspace(0,1,length(accang)));
+            interp1(linspace(0,1,length(SGDATA{ar(4)}.pots(1:61.5220,1))), SGDATA{ar(4)}.pots(1:61.5220,1)', linspace(0,1,length(accang)))];
+isolt5gp = [SGisolt52; accang; new_gps_angle];
+size(isolt5gp)  %attempt plot of this, against time frame
+
 
 %~6.4 seconds per rotation/encirclement
 1+1
